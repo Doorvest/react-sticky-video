@@ -21,6 +21,7 @@ const genPlayer = ({
   controls,
   events,
   setPlayer,
+  playerEvents,
 }) => {
   const player = new YT.Player(elemPlayer, {
     videoId,
@@ -88,21 +89,25 @@ const genPlayer = ({
     } else {
       clearInterval(timeupdateInterval);
     }
+
     switch (playerState) {
       case YT.PlayerState.PLAYING:
+        playerEvents.onPlay();
         events.onPlay();
         break;
       case YT.PlayerState.BUFFERING:
         if ([
-          -1,
+          YT.PlayerState.UNSTARTED,
           YT.PlayerState.PLAYING,
         ].indexOf(prevPlayerState) > -1) {
           events.onPlay();
         }
         break;
       case YT.PlayerState.ENDED:
+        playerEvents.onEnd();
       case YT.PlayerState.PAUSED:
         events.onPause();
+        playerEvents.onPause();
         break;
       case YT.PlayerState.CUED:
         events.onDurationChange(player.getDuration());
@@ -128,6 +133,7 @@ const Youtube = ({
   videoId,
   playerVars,
   controls,
+  playerEvents,
 }) => {
   const { dispatch } = useContext(Store);
   const [player, setPlayer] = useState({});
@@ -144,6 +150,7 @@ const Youtube = ({
         controls,
         events,
         setPlayer,
+        playerEvents,
       };
       if (libLoaded) {
         genPlayer(params);
@@ -189,6 +196,7 @@ Youtube.propTypes = {
     autoplay: PropTypes.bool,
   }).isRequired,
   controls: PropTypes.bool.isRequired,
+  playerEvents: PropTypes.shape({ onPlay: PropTypes.func, onEnd: PropTypes.func, onPause: PropTypes.func }),
 };
 
 export default Youtube;

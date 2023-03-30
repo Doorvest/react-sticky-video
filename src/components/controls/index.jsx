@@ -33,6 +33,7 @@ const Controls = forwardRef((
     onClickFullscreen,
     onCancelFullscreen,
     cancelHideControls,
+    controlsColor,
   },
   refCCButton,
 ) => {
@@ -71,7 +72,7 @@ const Controls = forwardRef((
 
   return (
     <>
-      {!hasPlayed && <PlayCircle isReady={isReady} />}
+      {!hasPlayed && <PlayCircle controlsColor={controlsColor} isReady={isReady} />}
       <div
         className={classNames(
           styles.gradientBottom,
@@ -137,6 +138,7 @@ Controls.propTypes = {
   onClickFullscreen: PropTypes.func.isRequired,
   onCancelFullscreen: PropTypes.func.isRequired,
   cancelHideControls: PropTypes.func.isRequired,
+  controlsColor: PropTypes.string,
 };
 
 Controls.defaultProps = {

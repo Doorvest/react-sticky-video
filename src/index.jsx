@@ -49,6 +49,8 @@ const StickyVideo = ({
     position,
   },
   originalControls,
+  playerEvents,
+  controlsColor,
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -242,6 +244,7 @@ const StickyVideo = ({
           videoId={videoId}
           playerVars={playerVars}
           controls={originalControls}
+          playerEvents={playerEvents}
         />
       );
       break;
@@ -332,6 +335,7 @@ const StickyVideo = ({
               isFullScreen={isFullScreen || isFullPage}
               isMobile={isMobile}
               captions={captions}
+              controlsColor={controlsColor}
               onClickFullscreen={handleClickFullscreen}
               onCancelFullscreen={handleCancelFullscreen}
               cancelHideControls={cancelHideControls}
@@ -383,6 +387,12 @@ StickyVideo.propTypes = {
     ]),
   }),
   originalControls: PropTypes.bool,
+  playerEvents: PropTypes.shape({
+    onPlay: PropTypes.func,
+    onPause: PropTypes.func,
+    onEnd: PropTypes.func,
+  }),
+  controlsColor: PropTypes.string,
 };
 
 StickyVideo.defaultProps = {
@@ -399,6 +409,12 @@ StickyVideo.defaultProps = {
     position: 'bottom-right',
   },
   originalControls: false,
+  playerEvents: {
+    onPlay: () => {},
+    onPause: () => {},
+    onEnd: () => {},
+  },
+  controlsColor: '#dd4400',
 };
 
 export default StickyVideo;

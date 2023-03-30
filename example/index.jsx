@@ -108,6 +108,11 @@ const App = () => {
             width={width}
             height={width * 0.5625}
             url={demoUrl}
+            playerEvents={{
+              onPlay: () => console.log('Video Started'),
+              onPause: () => console.log('Video Paused'),
+              onEnd: () => console.log('Video Ended'),
+            }}
           />
         )
         : <div />

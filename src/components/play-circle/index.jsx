@@ -9,7 +9,7 @@ import {
 import appStyles from '../../app.scss';
 import styles from './play-circle.scss';
 
-const PlayCircle = ({ isReady }) => (
+const PlayCircle = ({ isReady, controlsColor }) => (
   <>
     <div
       className={classNames(
@@ -21,6 +21,7 @@ const PlayCircle = ({ isReady }) => (
       className={styles.container}
     >
       <FontAwesomeIcon
+        style={{ color: controlsColor }}
         icon={isReady ? faPlayCircle : faCircleNotch}
         spin={!isReady}
       />
@@ -30,6 +31,7 @@ const PlayCircle = ({ isReady }) => (
 
 PlayCircle.propTypes = {
   isReady: PropTypes.bool,
+  controlsColor: PropTypes.string,
 };
 
 PlayCircle.defaultProps = {
