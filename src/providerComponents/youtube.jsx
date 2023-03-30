@@ -92,7 +92,7 @@ const genPlayer = ({
 
     switch (playerState) {
       case YT.PlayerState.PLAYING:
-        playerEvents.onPlay();
+        playerEvents?.onPlay?.();
         events.onPlay();
         break;
       case YT.PlayerState.BUFFERING:
@@ -104,10 +104,10 @@ const genPlayer = ({
         }
         break;
       case YT.PlayerState.ENDED:
-        playerEvents.onEnd();
+        playerEvents?.onEnd?.();
       case YT.PlayerState.PAUSED:
         events.onPause();
-        playerEvents.onPause();
+        playerEvents?.onPause?.();
         break;
       case YT.PlayerState.CUED:
         events.onDurationChange(player.getDuration());
