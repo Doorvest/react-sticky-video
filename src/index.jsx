@@ -47,7 +47,6 @@ const StickyVideo = ({
     width: stickyWidth,
     height: stickyHeight,
     position,
-    disabled,
   },
   originalControls,
   playerEvents,
@@ -168,7 +167,7 @@ const StickyVideo = ({
     const element = refHidden.current;
     const handleScroll = () => {
       if (!isSticky && !isElementInViewport(element)) {
-        if (isPlaying && !disabled) {
+        if (isPlaying) {
           dispatch({
             type: t.SET_STICKY,
             data: true,
